@@ -1,19 +1,20 @@
 package com.destro.entity;
 
 import org.hibernate.annotations.DialectOverride.Version;
-import org.springframework.data.annotation.Id;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 
 @Entity(name = "users")
 public class User {
 
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Id
-	@GeneratedValue
 	private Long id;
 	private String userId;
 	private String firstname;

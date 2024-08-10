@@ -1,6 +1,7 @@
 package com.destro.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,13 +16,11 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	
+	@PostMapping("/signup")
    public String signUp(@RequestBody UserSignUpRequest userSignUpRequest) {
-		
-	   
-	   return null;
+	   return userService.signUp(userSignUpRequest);
 		
 	}
-	
-	
 
 }

@@ -1,11 +1,11 @@
 package com.destro.entity.repo;
 
-import java.awt.print.Book;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.destro.entity.User;
+
 @Repository
-public interface  UserRepo  extends JpaRepository<Book, Long> {
+public interface  UserRepo  extends JpaRepository<User, Long> {
 
 }

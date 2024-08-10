@@ -1,9 +1,11 @@
 package com.destro.config;
 
+import java.util.Properties;
+
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,14 +17,13 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import com.zaxxer.hikari.HikariDataSource;
-
 import jakarta.persistence.EntityManagerFactory;
 
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories
+@EnableJpaRepositories("com.destro.entity.repo")
+@EntityScan("com.destro.entity.*)")
 public class DbConfig {
 
     @Autowired
@@ -46,9 +47,10 @@ public class DbConfig {
 		System.out.println("creating em");
 		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
 		em.setDataSource(dataSource);
-		em.setPackagesToScan("com.destro.repo");
+		em.setPackagesToScan("com.destro.entity");
 		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		em.setJpaVendorAdapter(vendorAdapter);
+		em.setJpaProperties(hibernateProperties());   
 		return em;
 	}
 
@@ -60,5 +62,20 @@ public class DbConfig {
 	    txManager.setEntityManagerFactory(entityManagerFactory);
 	    return txManager;
 	  }
+	 
+	 Properties hibernateProperties() {
+	      return new Properties() {
+	         /**
+	         * 
+	         */
+	        private static final long serialVersionUID = 1L;
+
+	        {
+	            setProperty("hibernate.hbm2ddl.auto", "create");
+	            setProperty("hibernate.show_sql", "false");
+	            setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
+	         }
+	      };
+	   }
 
 }
