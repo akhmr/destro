@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.destro.common.Response;
 import com.destro.request.UserSignUpRequest;
 import com.destro.services.UserService;
 
@@ -18,9 +19,10 @@ public class UserController {
 	
 	
 	@PostMapping("/signup")
-   public String signUp(@RequestBody UserSignUpRequest userSignUpRequest) {
-	   return userService.signUp(userSignUpRequest);
-		
+   public Response<String> signUp(@RequestBody UserSignUpRequest userSignUpRequest) {
+	   return new Response<String>("000","success",userService.signUp(userSignUpRequest));
 	}
+
+
 
 }

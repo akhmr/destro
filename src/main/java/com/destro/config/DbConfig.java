@@ -65,13 +65,9 @@ public class DbConfig {
 	 
 	 Properties hibernateProperties() {
 	      return new Properties() {
-	         /**
-	         * 
-	         */
 	        private static final long serialVersionUID = 1L;
 
 	        {
-	            setProperty("hibernate.hbm2ddl.auto", "create");
 	            setProperty("hibernate.show_sql", "false");
 	            setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
 	         }
